@@ -1,0 +1,10 @@
+welcome: 'Welcome to the loan calculator!'
+loan_amount: 'Please enter in a loan amount.'
+invalid_loan_amount: "That's not a valid number! Please enter a positive loan amount number."
+apr: "Please enter an annual percentage rate (APR). This calculator uses APR as percentage and not as decimal (e.g. 2.9% instead of 0.029)."
+invalid_apr: "That's not a valid number! Please enter a non-negative annual percentage rate (APR) number."
+loan_duration: 'Please enter a loan duration (i.e. in months).'
+invalid_loan_duration: "That's not a valid number! Please enter a positive loan duration number (in months). NO decimals."
+anticipatory_message: "I will now figure out your monthly payment (i.e. includes principle + interest)..."
+perform_again?: 'Would you like to perform another calculation? (Y = to continue)'
+goodbye: 'Thank you for using the loan calculator! Goodbye!'

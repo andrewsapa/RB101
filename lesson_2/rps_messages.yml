@@ -1,0 +1,11 @@
+welcome: 'Welcome to Rock, Paper, Scissors, Lizard, Spock'
+chance: 'The game of chance!'
+first: 'First to win 5 games wins the match!'
+ready: 'Get ready to play!'
+line: '--------------------------------------'
+continue: "Press 'enter' to continue."
+note: "Note: You may type ('s' for 'scissors'), ('sp' for 'spock'), ('p' for 'paper'), ('r' for 'rock'), and ('l' for 'lizard')."
+you_won: '***You won 5 games for a match win! Congratulations!***'
+computer_won: '***The computer won 5 games for a match win.***'
+again: "Do you want to play again (type 'y / yes' to play again or 'n / no' to exit)?"
+goodbye: 'Thank you for playing. Goodbye!'
