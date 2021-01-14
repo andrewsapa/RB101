@@ -79,9 +79,7 @@ def detect_result(dealer_total, player_total)
   end
 end
 
-def display_result(dealer_total, player_total)
-  result = detect_result(dealer_total, player_total)
-
+def display_result(result)
   case result
   when 'player_busted'
     prompt 'You busted! Dealer wins!'
@@ -117,28 +115,41 @@ def display_running_total(player_wins, dealer_wins)
   prompt "Game wins. Player: #{player} Dealer: #{dealer}."
 end
 
-def match_win?(player_wins, dealer_wins)
-  if player_wins.count == MATCH_WIN
-    puts "***********"
-    prompt "Congratulations! You won the match!"
-    puts "***********"
-    player_wins.clear && dealer_wins.clear
-  elsif dealer_wins.count == MATCH_WIN
-    puts "***********"
-    prompt "Sorry.The dealer won the match."
-    puts "***********"
-    player_wins.clear && dealer_wins.clear
-  end
-end
-
 def display_grand_output(dealer_hand, player_hand, player_total, dealer_total)
   puts "***********"
   prompt "Dealer has #{dealer_hand},
           for a total of: #{dealer_total}"
   prompt "Player has #{player_hand},
           for a total of: #{player_total}"
-  display_result(dealer_total, player_total)
   puts "***********"
+end
+
+def detect_match_win(player_wins, dealer_wins)
+  if player_wins.count == MATCH_WIN
+    'player'
+  elsif dealer_wins.count == MATCH_WIN
+    'dealer'
+  end
+end
+
+def display_match_win(match_result)
+  if match_result == 'player'
+    puts "***********"
+    prompt "Congratulations! You won the match!"
+    puts "***********"
+  elsif match_result == 'dealer'
+    puts "***********"
+    prompt "Sorry.The dealer won the match."
+    puts "***********"
+  end
+end
+
+def clear_match_wins(player_wins, dealer_wins)
+  if player_wins.count == MATCH_WIN
+    player_wins.clear && dealer_wins.clear
+  elsif dealer_wins.count == MATCH_WIN
+    player_wins.clear && dealer_wins.clear
+  end
 end
 
 def play_again?
@@ -199,9 +210,12 @@ loop do
   if player_total > WIN
     display_grand_output(dealer_hand, player_hand, player_total, dealer_total)
     result = detect_result(dealer_total, player_total)
+    display_result(result)
     detect_game_win(result, dealer_wins, player_wins)
     display_running_total(player_wins, dealer_wins)
-    match_win?(player_wins, dealer_wins)
+    match_result = detect_match_win(player_wins, dealer_wins)
+    display_match_win(match_result)
+    clear_match_wins(player_wins, dealer_wins)
     play_again? ? next : break
   else
     prompt "You stayed at #{player_total}"
@@ -224,9 +238,12 @@ loop do
     prompt "Dealer total is now: #{dealer_total}"
     display_grand_output(dealer_hand, player_hand, player_total, dealer_total)
     result = detect_result(dealer_total, player_total)
+    display_result(result)
     detect_game_win(result, dealer_wins, player_wins)
     display_running_total(player_wins, dealer_wins)
-    match_win?(player_wins, dealer_wins)
+    match_result = detect_match_win(player_wins, dealer_wins)
+    display_match_win(match_result)
+    clear_match_wins(player_wins, dealer_wins)
     play_again? ? next : break
   else
     prompt "Dealer stays at #{dealer_total}"
@@ -234,9 +251,12 @@ loop do
 
   display_grand_output(dealer_hand, player_hand, player_total, dealer_total)
   result = detect_result(dealer_total, player_total)
+  display_result(result)
   detect_game_win(result, dealer_wins, player_wins)
   display_running_total(player_wins, dealer_wins)
-  match_win?(player_wins, dealer_wins)
+  match_result = detect_match_win(player_wins, dealer_wins)
+  display_match_win(match_result)
+  clear_match_wins(player_wins, dealer_wins)
 
   break unless play_again?
 end
